@@ -511,9 +511,7 @@ function App() {
       let rimProtectorBadges__my = 0;
       let lockdownDefenderBadges__my = 0;
 
-      // console.log(pts);
-
-      if (player.badges.length != 0) {
+      if (player.badges.length !== 0) {
         myTeamBadges.push(player.badges);
       }
 
@@ -548,15 +546,15 @@ function App() {
       }
 
       //badge weights start
-      if (rimProtectorBadges__my != 0 && interiorForceBadges__my != 0) {
+      if (rimProtectorBadges__my !== 0 && interiorForceBadges__my !== 0) {
         pts += 4;
         console.log("big man pwr up");
         console.log(player.name + "scored 4 extra pts" + pts);
       }
-      if (playmakerBadges__my != 0 && volumeScorerBadges__my != 0) {
+      if (playmakerBadges__my !== 0 && volumeScorerBadges__my !== 0) {
         pts += 2;
       }
-      if (ballhawkBadges__my != 0 && quicksterBadges__my != 0) {
+      if (ballhawkBadges__my !== 0 && quicksterBadges__my !== 0) {
         pts += 2;
       }
       if (lockdownDefenderBadges__my === 1) {
@@ -658,7 +656,7 @@ function App() {
       myStats.innerHTML += `
       <div>
           <div class="player-stat-tab">
-              <img src="/imgs/avatar.jpg" class="tab-avatar"><p class="stat-tab-name">${player.name}</p>
+              <img src="/imgs/avatar.jpg" class="tab-avatar"><p class="stat-tab-name">${player.name}<span class="tab-position"> [${player.position}]</span><p class='tab-durability-back'></p><p class='tab-durability-front' style="width:${player.durability}px"></p></p>
               <p>Pts: ${pts} | Ast: ${ast} | Reb: ${reb} | Stl: ${stl} | Blk: ${blk} | T.O.'s: ${to} | </p>
           </div>
 
@@ -710,7 +708,7 @@ function App() {
       let rimProtectorBadges__picked = 0;
       let lockdownDefenderBadges__picked = 0;
 
-      if (player.badges.length != 0) {
+      if (player.badges.length !== 0) {
         pickedTeamBadges.push(player.badges);
       }
 
@@ -746,13 +744,16 @@ function App() {
       }
 
       //badge weights start
-      if (rimProtectorBadges__picked != 0 && interiorForceBadges__picked != 0) {
+      if (
+        rimProtectorBadges__picked !== 0 &&
+        interiorForceBadges__picked !== 0
+      ) {
         pts += 4;
       }
-      if (playmakerBadges__picked != 0 && volumeScorerBadges__picked != 0) {
+      if (playmakerBadges__picked !== 0 && volumeScorerBadges__picked !== 0) {
         pts += 2;
       }
-      if (ballhawkBadges__picked != 0 && quicksterBadges__picked != 0) {
+      if (ballhawkBadges__picked !== 0 && quicksterBadges__picked !== 0) {
         pts += 2;
       }
       if (lockdownDefenderBadges__picked === 1) {
@@ -854,7 +855,7 @@ function App() {
       pickedStats.innerHTML += `
       <div>
           <div class="player-stat-tab">
-          <img src="/imgs/avatar.jpg" class="tab-avatar"><p class="stat-tab-name">${player.name}<p>
+          <img src="/imgs/avatar.jpg" class="tab-avatar"><p class="stat-tab-name">${player.name}<span class="tab-position"> [${player.position}]</span><p class='tab-durability-back'></p><p class='tab-durability-front' style="width:${player.durability}px"></p><p>
               <p>Pts: ${pts} | Ast: ${ast} | Reb: ${reb} | Stl: ${stl} | Blk: ${blk} | T.O.'s: ${to} | </p>
           </div>
 
@@ -989,30 +990,6 @@ function App() {
     );
   }
 
-  // function shwMyTeamGameStats() {
-  //   return (
-  //     <div>
-  //       <div>
-  //         {myTeam.map((player, id) => {
-  //           let currentPlayer = player;
-  //           // console.log(currentPlayer);
-
-  //           return (
-  //             <div key={id}>
-  //               <div
-  //                 style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}
-  //               >
-  //                 <p>{currentPlayer.name}</p>
-  //                 <p id=""></p>
-  //               </div>
-  //             </div>
-  //           );
-  //         })}
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
   function shwGameStats() {
     return (
       <Button
@@ -1023,6 +1000,25 @@ function App() {
       >
         View Stats
       </Button>
+    );
+  }
+
+  function pgSelect() {
+    let pgs = myTeam.filter((player) => {
+      return player.position === "pg";
+    });
+    console.log(pgs);
+
+    return (
+      <select name="PG" id="pgs">
+        {pgs.map((player, id) => {
+          return (
+            <option id={id} value={player.name}>
+              {player.name}
+            </option>
+          );
+        })}
+      </select>
     );
   }
 
@@ -1042,7 +1038,7 @@ function App() {
               My Team
             </Button>
             <Button
-              style={{ color: "white" }}
+              style={{ color: "white", borderRadius: "0px" }}
               onClick={() => {
                 setGamePage(false);
                 setTeamPage(false);
@@ -1090,11 +1086,17 @@ function App() {
       <div className="App">
         <header className="App-header">
           <div className="btn-box">
-            <Button style={{ color: "white", borderBottom: "2px solid white" }}>
+            <Button
+              style={{
+                color: "white",
+                borderBottom: "2px solid white",
+                borderRadius: "0px",
+              }}
+            >
               My Team
             </Button>
             <Button
-              style={{ color: "white" }}
+              style={{ color: "white", borderRadius: "0px" }}
               onClick={() => {
                 setTeamPage(false);
                 setFreeAgentPage(true);
@@ -1119,6 +1121,9 @@ function App() {
         <p className="page-title">{myTeamName}</p>
 
         <div className="wrapper" key="1">
+          <label>PG:</label>
+
+          {pgSelect()}
           {myTeam.length > 0 ? shwMyTeam() : null}
         </div>
         {shwPlayGame()}
@@ -1134,11 +1139,17 @@ function App() {
                 setFreeAgentPage(false);
                 setTeamPage(true);
               }}
-              style={{ color: "white" }}
+              style={{ color: "white", borderRadius: "0px" }}
             >
               My Team
             </Button>
-            <Button style={{ color: "white", borderBottom: "2px solid white" }}>
+            <Button
+              style={{
+                color: "white",
+                borderBottom: "2px solid white",
+                borderRadius: "0px",
+              }}
+            >
               Free Agents
             </Button>
           </div>

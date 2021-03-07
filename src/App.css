@@ -23,7 +23,8 @@
   width: 100%;
   z-index: 100;
   top: 0;
-  padding: 5%;
+  padding-top: 5%;
+  padding-bottom: 5%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -187,4 +188,28 @@
   -moz-osx-font-smoothing: grayscale;
   margin-left: 14%;
   border-bottom: 2px solid whitesmoke;
+}
+
+.tab-durability-back {
+  padding: 0%;
+  margin: 0%;
+  background-color: red;
+  width: 100px;
+  height: 5px;
+  position: relative;
+  top: -5px;
+  left: 52px;
+}
+.tab-durability-front {
+  padding: 0%;
+  margin: 0%;
+  background-color: green;
+
+  height: 5px;
+  position: relative;
+  top: -10px;
+  left: 52px;
+}
+.tab-position {
+  font-weight: normal;
 }
